@@ -71,7 +71,9 @@ class Solution:
 >>myLinkedList.deleteAtIndex(1);    // now the linked list is 1->3
 >>myLinkedList.get(1);              // return 3
 ### Code
->
+>链表的增删，主要注意index的位置增和删都在cur.next,前一个节点是cur。还学习了链表的遍历，while和for循环都可以，cur = cur.next。
+>增加节点的时候要注意先把新节点指向下一个节点，再把上一个节点指向新节点。
+>如果改变顺序，因为新节点指向cur.next但是cur.next已经被改变了，因为新节点插在cur.next前面。
 ```python
 class ListNode():
     def __init__(self,val = 0, next = None):
@@ -147,7 +149,8 @@ class MyLinkedList:
 >>**Output:** [5,4,3,2,1]
 ### Code
 #### Method1 双指针
->
+>定义一个在head节点前面的pre节点指向None，因为翻转链表，指针最后需要指向None。
+>在遍历时需要有一个temp节点保存cur.next，不然翻转第一个节点的时候，cur还没有向后移动，cur.next已经没有了。
 ```python
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -164,6 +167,7 @@ class Solution:
 > - Time: O(N)
 > - Space: O(1)
 #### Method2 递归
+>递归法在双指针的基础上，把两个指针cur和pre当作递归函数的参数。递归终止条件为当cur移动到None的时候。
 ```python
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -179,3 +183,7 @@ class Solution:
 ```
 > - Time: O(N)
 > - Space: O(1)
+## 今日心得
+- 学习了新的数据结构链表，一开始看代码非常懵，为什么cur = head，都在cur上操作最后return head。以为和数组一样都是赋值，head就是链表，赋给cur之后是复制链表。
+- head是链表的头节点，指向链表，cur = head相当于把头节点赋给了cur，指向同一个链表。链表节点是通过内存地址传递的而非值传递，即cur和head指向相同地址。
+- 学习了dummy_head虚拟头节点可以保持处理逻辑统一，还有翻转链表双指针法！!这道题重点刷。
