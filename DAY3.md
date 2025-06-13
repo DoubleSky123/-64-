@@ -187,3 +187,4 @@ class Solution:
 - 学习了新的数据结构链表，一开始看代码非常懵，为什么cur = head，都在cur上操作最后return head。以为和数组一样都是赋值，head就是链表，赋给cur之后是复制链表。
 - head是链表的头节点，指向链表，cur = head相当于把头节点赋给了cur，指向同一个链表。链表节点是通过内存地址传递的而非值传递，即cur和head指向相同地址。
 - 学习了dummy_head虚拟头节点可以保持处理逻辑统一，还有翻转链表双指针法！!这道题重点刷。
+- ![cur = head](WechatIMG397.jpg)
