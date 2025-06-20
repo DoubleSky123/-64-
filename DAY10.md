@@ -25,6 +25,7 @@
 >>myQueue.pop(); // return 1, queue is [2]
 >>myQueue.empty(); // return false
 ### Code
+>用栈实现队列，一个栈是不行的
 ```python
 class MyQueue:
 
