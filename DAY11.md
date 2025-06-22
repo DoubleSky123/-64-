@@ -24,6 +24,16 @@
 >并不难，但是对于python中的运算符号需要有额外处理。
 ```python
 from operator import add, sub, mul
+def add(x, y): return x + y
+def sub(x, y): return x - y
+def mul(x, y): return x * y
+func = self.op_map[token]
+result = func(op1, op2)
+## 等价于写成一行
+result = self.op_map[token](op1, op2)
+```
+```python
+from operator import add, sub, mul
 
 def div(x, y):
     # 使用整数除法的向零取整方式
@@ -123,5 +133,4 @@ class Solution:
 > - Time: O(Nlogk)
 > - Space: O(N)
 ## 今日心得
-- 滑动窗口和堆应用这两题都较难。滑动窗口考察了单调队列的思路。堆应用考察了小顶堆的应用。逆波兰表达式则是经典栈应用，并且应用了python的operator库。
-- 都需要熟练记住。
+- 滑动窗口和堆应用这两题都较难。滑动窗口考察了单调队列的思路。堆应用考察了小顶堆的应用。逆波兰表达式则是经典栈应用，并且应用了python的operator库。都需要熟练记住。
