@@ -58,7 +58,8 @@ class Solution(object):
 >>**Output:**
 >>[3,3,5,5,6,7]
 ### Code
->单调队列实现。
+>单调队列实现。维护单调队列出口始终是最大值，使得它的前面不能有比它更大的值，如果比它小，则入队列。
+>当出口值超出窗口范围时，pop掉，如何实现，遍历的时候出口值==遍历值时。
 ```python
 class MyQueue:
     def __init__(self):
@@ -98,6 +99,9 @@ class Solution:
 >>**Output:**
 >> [1,2]
 ### Code
+>用优先级队列-小顶堆。首先用map统计每个数的频率，如果排序的话时间复杂是nlogn，如果用堆的话时间是nlogk。
+>python有可以直接实现小顶堆的库函数heapq。heapq.heappush(priority_que,(freq,key))按从小到大排列，队列出口，也就是根节点是最小值。
+>heapq.heappop(priority_que)，如果堆长度大于需要求的前k个字符，就pop。最后留下的就是最高频的。
 ```python
 import heapq
 class Solution:
@@ -120,5 +124,5 @@ class Solution:
 > - Time: O(Nlogk)
 > - Space: O(N)
 ## 今日心得
-- 开始栈和队列，python可以调用`deque()`双端队列，`popleft()`来实现队列。
-- 栈可以用来解决左右匹配问题。
+- 滑动窗口和堆应用这两题都较难。滑动窗口考察了单调队列的思路。堆应用考察了小顶堆的应用。逆波兰表达式则是经典栈应用，并且应用了python的operator库。
+- 都需要熟练记住。
