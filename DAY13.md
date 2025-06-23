@@ -14,146 +14,190 @@
         self.right = right
     ```
 - 二叉树的遍历方式
-  - 深度优先遍历
+  - 深度优先遍历（栈）
     1. 前序遍历：中左右（递归法、迭代法）
     2. 中序遍历：左中右（递归法、迭代法）
     3. 后序遍历：左右中（递归法、迭代法）
-  - 广度优先遍历
+  - 广度优先遍历（队列）
     - 层序遍历（迭代法）
 - 递归遍历三部曲
   1. 确定递归函数的参数和返回值
   2. 确定终止条件
   3. 确定单层递归的逻辑
-## 150. Evaluate Reverse Polish Notation
-[Leetcode Link](https://leetcode.cn/problems/evaluate-reverse-polish-notation/description/)-Medium
+## 144. Binary Tree Preorder Traversal
+[Leetcode Link](https://leetcode.cn/problems/binary-tree-preorder-traversal/description/)-Easy
 ### Description
->You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
->Evaluate the expression. Return an integer that represents the value of the expression.Note that:
->The valid operators are '+', '-', '*', and '/'.
->Each operand may be an integer or another expression.
->The division between two integers always truncates toward zero.
->There will not be any division by zero.
->The input represents a valid arithmetic expression in a reverse polish notation.
->The answer and all the intermediate calculations can be represented in a 32-bit integer.
+>Given the root of a binary tree, return the preorder traversal of its nodes' values.
 >>**Example 1:**
 >>**Input:**
->>tokens = ["2","1","+","3","*"]
+>>root = [1,null,2,3]
 >>**Output:**
->>9
->>**Explanation:**
->>((2 + 1) * 3) = 9
+>>[1,2,3]
 ### Code
->逆波兰表达式，栈经典应用。遍历数组的时候，遇到数字就入栈，遇到运算符号就弹出计算，再把计算结果入栈，最后栈内的结果即是最终结果。
->并不难，但是对于python中的运算符号需要有额外处理。
+#### Method1 递归
 ```python
-from operator import add, sub, mul
-def add(x, y): return x + y
-def sub(x, y): return x - y
-def mul(x, y): return x * y
-func = self.op_map[token]
-result = func(op1, op2)
-## 等价于写成一行
-result = self.op_map[token](op1, op2)
-```
-```python
-from operator import add, sub, mul
-
-def div(x, y):
-    # 使用整数除法的向零取整方式
-    return int(x / y) if x * y > 0 else -(abs(x) // abs(y))
-
-class Solution(object):
-    op_map = {'+': add, '-': sub, '*': mul, '/': div}
-    
-    def evalRPN(self, tokens: List[str]) -> int:
-        stack = []
-        for token in tokens:
-            if token not in {'+', '-', '*', '/'}:
-                stack.append(int(token))
-            else:
-                op2 = stack.pop()
-                op1 = stack.pop()
-                stack.append(self.op_map[token](op1, op2))  # 第一个出来的在运算符后面
-        return stack.pop()
-```
-> - Time: O(N)
-> - Space: O(N)
-## 239. Sliding Window Maximum
-[Leetcode Link](https://leetcode.cn/problems/sliding-window-maximum/description/)-Hard
-### Description
->You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right.
->You can only see the k numbers in the window. Each time the sliding window moves right by one position.
->Return the max sliding window.
->>**Example 1:**
->>**Input:**
->>nums = [1,3,-1,-3,5,3,6,7], k = 3
->>**Output:**
->>[3,3,5,5,6,7]
-### Code
->单调队列实现。维护单调队列出口始终是最大值，使得它的前面不能有比它更大的值，如果比它小，则入队列。
->当出口值超出窗口范围时，pop掉，如何实现，遍历的时候出口值==遍历值时。
-```python
-class MyQueue:
-    def __init__(self):
-        self.queue = deque()
-    def pop(self,value):
-        if self.queue and value == self.queue[0]:
-            self.queue.popleft()
-    def push(self,value):
-        while self.queue and value > self.queue[-1]:
-            self.queue.pop()
-        self.queue.append(value)
-    def front(self):
-        return self.queue[0]
-
 class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        queue = MyQueue()
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         result = []
-        for i in range(k):
-            queue.push(nums[i])
-        result.append(queue.front())
-        for i in range(k,len(nums)):
-            queue.pop(nums[i-k])
-            queue.push(nums[i])
-            result.append(queue.front())
+        def dfs(cur):
+            if not cur:
+                return
+            result.append(cur.val)
+            dfs(cur.left)
+            dfs(cur.right)
+        dfs(root)
         return result
 ```
 > - Time: O(N)
-> - Space: O(K)
-## 347. Top K Frequent Elements
-[Leetcode Link](https://leetcode.cn/problems/top-k-frequent-elements/description/)-Medium
-### Description
->Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
->>**Example 1:**
->>**Input:**
->> nums = [1,1,1,2,2,3], k = 2
->>**Output:**
->> [1,2]
-### Code
->用优先级队列-小顶堆。首先用map统计每个数的频率，如果排序的话时间复杂是nlogn，如果用堆的话时间是nlogk。
->python有可以直接实现小顶堆的库函数heapq。heapq.heappush(priority_que,(freq,key))按从小到大排列，队列出口，也就是根节点是最小值。
->heapq.heappop(priority_que)，如果堆长度大于需要求的前k个字符，就pop。最后留下的就是最高频的。
+> - Space: O(N)
+#### Method2 迭代
+>用栈注意先遍历右子树再遍历左子树，弹出加入到结果就是左到右。
 ```python
-import heapq
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        map_ = {}
-        for i in nums:
-            map_[i] = map_.get(i,0) + 1
-        priority_que = []
-        for key,freq in map_.items():
-            heapq.heappush(priority_que,(freq,key))
-            print(priority_que)
-            if len(priority_que) > k:
-                heapq.heappop(priority_que)
-                print(priority_que)
-        result = [0] *k
-        for i in range(k-1,-1,-1):
-            result[i] = heapq.heappop(priority_que)[1]
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        stack = [root]
+        result = []
+        while stack:
+            node = stack.pop()
+            result.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
         return result
 ```
-> - Time: O(Nlogk)
+> - Time: O(N)
 > - Space: O(N)
-## 今日心得
-- 滑动窗口和堆应用这两题都较难。滑动窗口考察了单调队列的思路。堆应用考察了小顶堆的应用。逆波兰表达式则是经典栈应用，并且应用了python的operator库。都需要熟练记住。
+## 94. Binary Tree Inorder Traversal
+[Leetcode Link](https://leetcode.cn/problems/binary-tree-inorder-traversal/description/)-Easy
+### Description
+>Given the root of a binary tree, return the inorder traversal of its nodes' values.
+>>**Example 1:**
+>>**Input:**
+>>root = [1,null,2,3]
+>>**Output:**
+>>[1,3,2]
+### Code
+#### Method1 递归
+```python
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        def dfs(cur):
+            if not cur:
+                return 
+
+            dfs(cur.left)
+            result.append(cur.val)
+            dfs(cur.right)
+
+        dfs(root)
+
+        return result
+```
+> - Time: O(N)
+> - Space: O(N)
+#### Method2 迭代
+>中序迭代和前后不一样，因为要从左子树开始，所以要用一个指针，从左往右遍历。
+```python
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        stack = []
+        result = []
+        cur = root
+        while cur or stack:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                result.append(cur.val)
+                cur = cur.right
+        return result
+```
+> - Time: O(N)
+> - Space: O(N)
+## 145. Binary Tree Postorder Traversal
+[Leetcode Link](https://leetcode.cn/problems/binary-tree-postorder-traversal/description/)-Easy
+### Description
+>Given the root of a binary tree, return the postorder traversal of its nodes' values.
+>>**Example 1:**
+>>**Input:**
+>>root = [1,null,2,3]
+>>**Output:**
+>>[3,2,1]
+### Code
+#### Method1 递归
+```python
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        def dfs(cur):
+            if not cur:
+                return
+            dfs(cur.left)
+            dfs(cur.right)
+            result.append(cur.val)
+        
+        dfs(root)
+        return result
+```
+> - Time: O(N)
+> - Space: O(N)
+#### Method2 迭代
+>和前序一样，把左右子树遍历顺序颠倒，变成中左右，得到中右左的数组，然后反转数组即是左右中。
+```python
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        stack = [root]
+        result = []
+        while stack:
+            node = stack.pop()
+            result.append(node.val)
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+        return result[::-1]
+```
+> - Time: O(N)
+> - Space: O(N)
+## 102. Binary Tree Level Order Traversal
+[Leetcode Link](https://leetcode.cn/problems/binary-tree-level-order-traversal/description/)- Medium
+### Description
+>Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+>>**Example 1:**
+>>**Input:**
+>>root = [3,9,20,null,null,15,7]
+>>**Output:**
+>>[[3],[9,20],[15,7]]
+### Code
+>层序遍历是BFS，将树一层层遍历，用队列。
+>记录每一层的长度，然后一个个加入到队列再弹出。
+```python
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        queue = deque([root])
+        result = []
+        while queue:
+            level = []
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                level.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            result.append(level)
+        return result
+```
+> - Time: O(N)
+> - Space: O(N)
