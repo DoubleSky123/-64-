@@ -4,6 +4,12 @@
 [203讲解](https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html)
 [707讲解](https://programmercarl.com/0707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8.html)
 [206讲解](https://programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html)
+``` python
+class ListNode:
+    def __init__(self, val, next=None):
+        self.val = val
+        self.next = next
+```
 ## 203. Remove Linked List Elements
 [Leetcode Link](https://leetcode.cn/problems/remove-linked-list-elements/description/)-Easy
 ### Description
