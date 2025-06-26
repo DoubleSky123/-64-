@@ -173,16 +173,19 @@ class Solution:
 ```python
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
-        if not root.left and not root.right:
-            return 0
-        leftValue = self.sumOfLeftLeaves(root.left)
-        if root.left and not root.left.left and not root.left.right:
-            leftValue = root.left.val
-        rightValue = self.sumOfLeftLeaves(root.right)
-        sum_ = leftValue+rightValue
-        return sum_
+        self.leftSum = 0
+
+        def dfs(node):
+            
+            if not node:
+                return 
+            if node.left and not node.left.left and not node.left.right:
+                self.leftSum += node.left.val
+            dfs(node.left)
+            dfs(node.right)
+
+        dfs(root)
+        return self.leftSum
 ```
 > - Time: O(N)
 > - Space: O(H)
@@ -193,5 +196,3 @@ class Solution:
 > - Time: O(N)
 > - Space: O(N)
 ## 今日心得
-- 二叉树遍历题目，一定要先确定遍历顺序，是理解题目的关键。
-- 后续把迭代法补上。
