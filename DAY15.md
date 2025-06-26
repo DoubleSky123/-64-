@@ -38,6 +38,7 @@
 >>6
 ### Code
 #### Method1 普通递归
+>后序遍历最方便，从叶子节点开始累加节点数量
 ```python
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
@@ -53,6 +54,9 @@ class Solution:
 > - Time: O(N)
 > - Space: O(H)
 #### Method2 完全二叉树递归
+>利用完全二叉树性质，完全二叉树除最后一层外，前面是满二叉树，节点数为2^Height-1.
+>利用满二叉树性质，分治思想，分别计算左右深度。先用指针直接计算左右子树深度，而不用遍历整颗子树。如果左右子树深度相同，即为满二叉树，返回(2<<leftDepth)-1， <<=2^(n+1)。
+>如果不同，继续向下遍历直到遍历到叶子节点，叶子节点也为满二叉树，因为左右深度都为0，返回self.countNodes(root.left) + self.countNodes(root.right) + 1，即节点数为1.
 ```python
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
@@ -85,25 +89,25 @@ class Solution:
 >>true
 ### Code
 #### Method1 递归
+>平衡二叉树，左右子树高度差不超过1.
+>用后序遍历方法先计算高度，左右变量记录左右子树高度，中处理高度差是否大于1，大于则返回-1，最后用result记录高度。
+>这里在递归左右子树的时候，如果高度差已经大于-1，则需要马上返回-1.所以在左右递归后需要加判断条件，及时返回。
 ```python
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        if self.get_height(root) != -1:
-            return True
-        else:
-            return False 
-    def get_height(self,root):
-        #base case
+        return self.getHeight(root) != -1
+
+    def getHeight(self,root)->int:  
         if not root:
             return 0
-        if (left_height := self.get_height(root.left)) == -1:
-            return -1
-        if (right_height := self.get_height(root.right)) ==-1:
-            return -1
-        if abs(left_height-right_height)>1:
-            return -1
-        else:
-            return 1+max(left_height,right_height)
+        leftHeight = self.getHeight(root.left)
+        if leftHeight == -1: return -1 
+        rightHeight = self.getHeight(root.right)
+        if rightHeight == -1: return -1 
+        
+        if abs(leftHeight-rightHeight) > 1: return -1 
+        result = 1+max(leftHeight,rightHeight)
+        return result
 ```
 > - Time: O(N)
 > - Space: O(H)
@@ -125,6 +129,9 @@ class Solution:
 >>["1->2->5","1->3"]
 ### Code
 #### Method1 递归
+>终止条件不是空节点，而是叶子节点，因为这里只需要遍历到叶子节点即可终止。
+>同时需要回溯，因为遍历完一条路径后需要回溯到根节点遍历另一条路径。
+>"->".join(map(str,path))先记录节点数值，再用map转为str，再用join->。
 ```python
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
@@ -170,6 +177,7 @@ class Solution:
 >>There are two left leaves in the binary tree, with values 9 and 15 respectively.
 ### Code
 #### Method1 递归
+>终止条件为：存在左叶子，且为叶子节点。
 ```python
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
@@ -196,3 +204,8 @@ class Solution:
 > - Time: O(N)
 > - Space: O(N)
 ## 今日心得
+- 递归学了4天还是没学明白。
+- 计算二叉树的深度和高度，分别用前序和后序，后序相对简单。
+- 完全二叉树和平衡二叉树的性质。
+- 遍历终止条件根据题意可以为叶子节点，即左右孩子都为空。
+- 如果在遍历过程中需要及时返回，需要在左右递归后加判断条件（参照112.路经总和）。
