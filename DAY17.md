@@ -25,7 +25,7 @@
   2. 确定终止条件
   3. 确定单层递归的逻辑
 ## 654. Maximum Binary Tree
-[Leetcode Link]((https://leetcode.cn/problems/maximum-binary-tree/description/))-Medium
+[Leetcode Link](https://leetcode.cn/problems/maximum-binary-tree/description/)-Medium
 ### Description
 >You are given an integer array nums with no duplicates. A maximum binary tree can be built recursively from nums using the following algorithm:
 >Create a root node whose value is the maximum value in nums.
