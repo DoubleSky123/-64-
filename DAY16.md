@@ -35,10 +35,14 @@
 >>7
 ### Code
 #### Method1 递归
->
+>最左下角值为，深度最深的一排叶子节点，为什么要记录深度和最大深度，因为后面确保右叶子不会覆盖左叶子。
+>因为记录叶子数值即可，终止条件在叶子节点。
+>不管是什么遍历顺序，由于都是先访问左子树，在同一深度的叶子节点中，最左侧的会先被访问到。使用depth > maxDepth（严格大于）确保了同深度的后续节点不会覆盖结果。
 ```python
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+        if not root:  # 添加空树检查
+            return 0 
         self.maxDepth = float('-inf')
         self.result = 0
 
@@ -78,7 +82,10 @@ class Solution:
 >>The root-to-leaf path with the target sum is shown.
 ### Code
 #### Method1 递归
->
+>前序遍历，遍历到叶子节点终止。
+>直接先用targetSum减去节点值，然后如果遍历到叶子节点，返回targetSum是否等于0。
+>左右遍历，需要有返回值返回上层。最后如果没有返回true，则返回false.
+>隐式回溯。
 ```python
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
@@ -87,8 +94,8 @@ class Solution:
         return self.traversal(root,targetSum)
          
     def traversal(self,node,targetSum):
-        # if not node:
-        #     return False
+        if not node:
+           return False
 
         targetSum -= node.val
         if not node.left and not node.right:
@@ -146,3 +153,4 @@ class Solution:
 > - Space: O(N)
 ## 今日心得
 - 如果需要搜索整棵二叉树，那么递归函数就不要返回值，如果要搜索其中一条符合条件的路径，递归函数就需要返回值，因为遇到符合条件的路径了就要及时返回。
+- 
