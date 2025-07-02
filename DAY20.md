@@ -119,6 +119,8 @@ class Solution:
 ### Code
 #### Method1 递归
 > 删除节点需要分情况：1.删除叶子节点，直接return None，将其返回给父节点
+> 2.左空右不空和右空左不空，返回对应节点给父节点
+> 3.左右都不为空，需要改变树结构，设置一个指针遍历到最左叶子节点，然后将左子树赋给这个节点的左子树，返回给父节点的右子树。
 ```python
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
@@ -154,5 +156,4 @@ class Solution:
 > - Time: O(H)
 > - Space: O(H)
 ## 今日心得
-- BST题目需要活用双指针。
-- 公共祖先用后序遍历，自下往上。
+- BST的插入和删除操作，其中删除节点记住删除左右都不为空节点时，用指针使得删除节点的最左侧节点成为父节点，接上左子树，然后返回给右子树。
