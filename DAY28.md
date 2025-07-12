@@ -1,4 +1,4 @@
-# DAY 27｜122. Best Time to Buy and Sell Stock II 55. Jump Game 45. Jump Game II 1005. Maximize Sum Of Array After K Negations
+# DAY 28｜122. Best Time to Buy and Sell Stock II 55. Jump Game 45. Jump Game II 1005. Maximize Sum Of Array After K Negations
 ## 学习内容
 [贪心算法理论基础](https://programmercarl.com/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html)
 ## 122. Best Time to Buy and Sell Stock II
