@@ -1,4 +1,4 @@
-# DAY 29｜452. Minimum Number of Arrows to Burst Balloons 435. Non-overlapping Intervals 763. Partition Labels
+# DAY 30｜452. Minimum Number of Arrows to Burst Balloons 435. Non-overlapping Intervals 763. Partition Labels
 ## 学习内容
 [贪心算法理论基础](https://programmercarl.com/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html)
 ## 452. Minimum Number of Arrows to Burst Balloons
