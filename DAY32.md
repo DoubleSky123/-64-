@@ -1,12 +1,12 @@
 # DAY 32｜509. Fibonacci Number 70. Climbing Stairs 746. Min Cost Climbing Stairs
 ## 学习内容
 [动态规划理论基础](https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE)
-动规五步曲：
-1.确定dp数组（dp table）以及下标的含义
-2.确定递推公式
-3.dp数组如何初始化
-4.确定遍历顺序
-5.举例推导dp数组
+- 动规五步曲：
+    - 确定dp数组（dp table）以及下标的含义
+    - 确定递推公式
+    - dp数组如何初始化
+    - 确定遍历顺序
+    - 举例推导dp数组
 ## 509. Fibonacci Number
 [Leetcode Link](https://leetcode.cn/problems/fibonacci-number/description/)-Easy
 ### Description
