@@ -1,4 +1,4 @@
-# DAY 34｜416. Partition Equal Subset Sum
+# DAY 35｜416. Partition Equal Subset Sum
 ## 学习内容
 [背包理论基础](https://programmercarl.com/%E8%83%8C%E5%8C%85%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%8001%E8%83%8C%E5%8C%85-1.html)
 - dp数组含义：二维数组为 dp[i][j]：i表示物品，j表示背包容量。
