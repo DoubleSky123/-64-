@@ -51,7 +51,7 @@ class Solution:
 ### Code
 >dp[i][j]：字符串s在[i, j]范围内最长的回文子序列的长度为dp[i][j]。
 >看i和j是否相同，如果相同，那就在dp[i+1][j-1] +2，如果不同，取dp[i+1][j],dp[i][j-1]最大值。
->初始化：当i与j相同，那么dp[i][j]一定是等于1的，即：一个字符的回文子序列长度就是1。
+>初始化：当i与j相同，i和j一直向内移动移动到指向同一个元素，即：一个字符的回文子序列长度就是1。
 ```python
 class Solution:
     def longestPalindromeSubseq(self, s: str) -> int:
