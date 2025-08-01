@@ -1,4 +1,4 @@
-# DAY 47｜739. Daily Temperatures 496. Next Greater Element I 503. Next Greater Element II
+# DAY 48｜739. Daily Temperatures 496. Next Greater Element I 503. Next Greater Element II
 ## 学习内容
 [单调栈理论基础](https://programmercarl.com/0739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6.html)
 ## 739. Daily Temperatures
