@@ -1,4 +1,4 @@
-# DAY 48｜42. Trapping Rain Water 84. Largest Rectangle in Histogram
+# DAY 49｜42. Trapping Rain Water 84. Largest Rectangle in Histogram
 ## 学习内容
 [单调栈理论基础](https://programmercarl.com/0739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6.html)
 ## 42. Trapping Rain Water
